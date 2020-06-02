@@ -1,0 +1,26 @@
+   float2 up = float2(0, -1);
+    float2 dup = GetD(up);
+    float4 cup = Generate(rnd, dup);
+    float4 prevGyT = gGradY[launchIndex + up] * framesCount;
+    gGradY[launchIndex + up] = (prevGyT + 0.5 * (c - cup)) / nextFrameCount;
+    
+    
+    float2 down = float2(0, 1);
+    float2 ddown = GetD(down);
+    float4 cdown = Generate(rnd, ddown);
+    float4 prevGy = gGradY[launchIndex] * framesCount;
+    gGradY[launchIndex] = (prevGy + 0.5 * (cdown - c)) / nextFrameCount;
+    
+
+    float2 left = float2(-1, 0);
+    float2 dleft = GetD(left);
+    float4 cleft = Generate(rnd, dleft);
+    float4 prevGxL = gGradX[launchIndex + left] * framesCount;
+    gGradX[launchIndex + left] = (prevGxL + 0.5 * (c - cleft)) / nextFrameCount;
+    
+
+    float2 right = float2(1, 0);
+    float2 dright = GetD(right);
+    float4 cright = Generate(rnd, dright);
+    float4 prevGx = gGradX[launchIndex] * framesCount;
+    gGradX[launchIndex] = (prevGx + 0.5 * (cright - c)) / nextFrameCount;
